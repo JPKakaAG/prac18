@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:prac18"
         mc:Ignorable="d"
-        Title="MainWindow" ResizeMode="NoResize" Height="502" Width="948">
+        Title="MainWindow" Loaded="Window_Loaded" ResizeMode="NoResize" Height="502" Width="948">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65*"/>
@@ -18,7 +18,7 @@
             <ColumnDefinition Width="78*"/>
             <ColumnDefinition Width="61*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="3" Margin="65,78,65,0" Grid.RowSpan="2"/>
+        <DataGrid x:Name="dg1" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="3" Margin="65,78,65,0" Grid.RowSpan="2"/>
         <Menu Grid.ColumnSpan="3" Margin="0,0,0,46">
             <MenuItem Header="Добавить" Click="btnAdd_Click"></MenuItem>
             <MenuItem Header="Изменить" Click="btnEdit_Click"></MenuItem>
@@ -27,7 +27,10 @@
             <MenuItem Header="О программе" Click="btnInfo_Click"></MenuItem>
             <MenuItem Header="Выход" Click="btnExit_Click"></MenuItem>
         </Menu>
-
+        <Button x:Name="btnRight" Click="btnRight_Click" Grid.Column="1" Content="&gt;" HorizontalAlignment="Left" Margin="185,39,0,0" Grid.Row="1" VerticalAlignment="Top" Width="25" Height="25"/>
+        <Button x:Name="btnLeft" Click="btnLeft_Click" Grid.Column="1" Content="&lt;" HorizontalAlignment="Left" Margin="135,39,0,0" Grid.Row="1" VerticalAlignment="Top" Width="25" Height="25"/>
+        <Label x:Name="nTable" Grid.Column="1" Content="Таблица №1" HorizontalAlignment="Left" Margin="133,13,0,0" Grid.Row="1" VerticalAlignment="Top" Width="89"/>
+        <TextBox x:Name="tbIndex" HorizontalAlignment="Left" Margin="289,65,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Hidden"/>
 
     </Grid>
 </Window>
