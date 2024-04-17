@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
+using prac18.models;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -28,44 +30,85 @@ namespace prac18
         {
             using (Devyatkinv11pr18Context _db = new Devyatkinv11pr18Context())
             {
-                if (tbIndex.Text == "1")
+                int selectedIndex = dg1.SelectedIndex;
+                _db.Veterans.Load();
+                dg1.ItemsSource = _db.Veterans.ToList();
+                if (selectedIndex != -1)
                 {
-                    nTable.Content = "Таблица №1";
-                    btnLeft.Visibility = Visibility.Collapsed;
+                    if (selectedIndex == dg1.Items.Count) selectedIndex--;
+                    dg1.SelectedIndex = selectedIndex;
+                    dg1.ScrollIntoView(dg1.SelectedItem);
                 }
-                if (tbIndex.Text == "3")
-                {
-                    nTable.Content = "Таблица №3";
-                    btnRight.Visibility = Visibility.Collapsed;
-                }
-                if (tbIndex.Text == "2")
-                {
-                    nTable.Content = "Таблица №3";
-                    btnLeft.Visibility = Visibility.Visible;
-                    btnRight.Visibility = Visibility.Visible;
-                }
-                
+                dg1.Focus();
             }
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            Data.devyatkinVeteran = null;
+            AddEdit f = new AddEdit();
+            f.Owner = this;
+            f.ShowDialog();
+            LoadDBInDataGrid();
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-
+            if (dg1.SelectedItem != null)
+            {
+                Data.devyatkinVeteran = (Veteran)dg1.SelectedItem;
+                AddEdit f = new AddEdit();
+                f.Owner = this;
+                f.ShowDialog();
+                LoadDBInDataGrid();
+            }
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBoxResult result;
+            result = MessageBox.Show("Удалить запись?", "Удаление записи",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Veteran row =(Veteran)dg1.SelectedItem;
+                    if (row != null)
+                    {
+                        using (Devyatkinv11pr18Context _db = new Devyatkinv11pr18Context())
+                        {
+                            _db.Veterans.Remove(row);
+                            _db.SaveChanges();
+                        }
+                        LoadDBInDataGrid();
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка удаления");
+                }
+            }
+            else dg1.Focus();
         }
 
         private void btnView_Click(object sender, RoutedEventArgs e)
         {
-
+            if (dg1.SelectedItems != null)
+            {
+                Data.devyatkinVeteran = (Veteran)dg1.SelectedItem;
+                AddEdit ar = new AddEdit();
+                ar.tbAge.IsEnabled = false;
+                ar.tbAgeGroup.IsEnabled = false;
+                ar.tbApartment.IsEnabled = false;
+                ar.tbF.IsEnabled = false;
+                ar.tbN.IsEnabled = false;
+                ar.tbO.IsEnabled = false;
+                ar.WindowAddEdit.Title = "Просмотр записи";
+                ar.btnAddEdit.IsEnabled = false;
+                ar.ShowDialog();
+                LoadDBInDataGrid();
+            }
         }
 
         private void btnInfo_Click(object sender, RoutedEventArgs e)
@@ -75,21 +118,7 @@ namespace prac18
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void btnRight_Click(object sender, RoutedEventArgs e)
-        {
-            int n = Convert.ToInt32(tbIndex.Text);
-            n += 1;
-            tbIndex.Text = n.ToString();
-        }
-
-        private void btnLeft_Click(object sender, RoutedEventArgs e)
-        {
-            int n = Convert.ToInt32(tbIndex.Text);
-            n -= 1;
-            tbIndex.Text = n.ToString();
-        }
+            this.Close();
+        }       
     }
 }

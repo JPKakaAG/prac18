@@ -8,8 +8,6 @@ namespace prac18.models
 {
     public static class Data
     {
-        public static Hotel? devyatkinHotel;
-        public static RoomAssignment? devyatkinRoom;
         public static Veteran? devyatkinVeteran;
     }
 }

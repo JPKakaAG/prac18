@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace prac18;
+namespace prac18.models;
 
 public partial class Veteran
 {
@@ -17,5 +17,5 @@ public partial class Veteran
 
     public string? ВозрастнуюГруппа { get; set; }
 
-    public virtual ICollection<RoomAssignment> RoomAssignments { get; set; } = new List<RoomAssignment>();
+    public int? НомерКомнаты { get; set; }
 }
