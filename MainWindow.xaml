@@ -29,7 +29,7 @@
                 <DataGridTextColumn Width="20*" Header="Номер комнаты" Binding="{Binding НомерКомнаты}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Menu Grid.ColumnSpan="3" Margin="0,0,0,46">
+        <Menu Grid.ColumnSpan="3" Margin="0,0,0,44">
             <MenuItem Header="Добавить" Click="btnAdd_Click"></MenuItem>
             <MenuItem Header="Изменить" Click="btnEdit_Click"></MenuItem>
             <MenuItem Header="Удалить" Click="btnDelete_Click"></MenuItem>
@@ -39,16 +39,21 @@
         </Menu>
         <GroupBox Header="Выборка" Grid.Row="1">
             <Grid>
-                <RadioButton Content="1" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top"/>
-                <RadioButton Content="2" VerticalAlignment="Top" Margin="66,3,186,0"/>
-                <RadioButton Content="3" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,3,0,0"/>
-                <RadioButton Content="4" HorizontalAlignment="Left" Margin="186,3,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.343,-1.176"/>
-                <RadioButton Content="5" HorizontalAlignment="Left" Margin="242,3,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked"/>
+                <RadioButton x:Name="rdv1" Content="1" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top"/>
+                <RadioButton x:Name="rdv2" Content="2" VerticalAlignment="Top" Margin="66,3,169,0"/>
+                <RadioButton x:Name="rdv3" Content="3" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,3,0,0"/>
+                <RadioButton x:Name="rdv4" Content="4" HorizontalAlignment="Left" Margin="186,3,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.343,-1.176"/>
+                <RadioButton x:Name="rdv5" Content="5" HorizontalAlignment="Left" Margin="242,3,0,0" VerticalAlignment="Top"/>
                 <Button x:Name="btnViborka" Click="btnViborka_Click" Content="Выборка" HorizontalAlignment="Center" Margin="0,28,0,0" VerticalAlignment="Top"/>
 
             </Grid>
         </GroupBox>
-
-
+        <GroupBox Header="Обновление" Grid.ColumnSpan="2" Margin="289,65,261,0" Grid.RowSpan="2">
+            <Grid>
+                <RadioButton x:Name="rdo1" Content="1" HorizontalAlignment="Left" Margin="7,3,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked"/>
+                <RadioButton x:Name="rdo2" Content="2" HorizontalAlignment="Left" Margin="48,3,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="btnUpdate" Click="btnUpdate_Click" Content="Обновление" HorizontalAlignment="Left" Margin="13,29,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>

@@ -119,6 +119,58 @@ namespace prac18
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }       
+        }
+
+        private void btnViborka_Click(object sender, RoutedEventArgs e)
+        {
+            using (Devyatkinv11pr18Context _db = new Devyatkinv11pr18Context()) 
+            {
+                if (rdv1.IsChecked == true)
+                {
+                    var women = from Veteran in _db.Veterans where Veteran.Фамилия.EndsWith("а") select Veteran;
+                    dg1.ItemsSource = women.ToList();
+                    MessageBox.Show("Были выбраны только девушки");
+                }
+                else if (rdv2.IsChecked == true) 
+                {
+                    var age = from Veteran in _db.Veterans where Veteran.Возраст > 20 select Veteran;
+                    dg1.ItemsSource = age.ToList();
+                    MessageBox.Show("Были выбраны те кто старше 20 лет");
+                }
+                else if (rdv3.IsChecked == true)
+                {
+                    var age = from Veteran in _db.Veterans where Veteran.Имя.StartsWith("В") select Veteran;
+                    dg1.ItemsSource = age.ToList();
+                    MessageBox.Show("Были выбраны те чьё имя начинается на 'В' ");
+                }
+                else if (rdv4.IsChecked == true)
+                {
+                    var age = from Veteran in _db.Veterans where Veteran.НомерКомнаты <= 100 && Veteran.НомерКомнаты >= 1 select Veteran;
+                    dg1.ItemsSource = age.ToList();
+                    MessageBox.Show("Были выбраны те кто живёт с 1 по 100 комнату ");
+                }
+                else if (rdv5.IsChecked == true)
+                {
+                    var age = from Veteran in _db.Veterans where Veteran.ВозрастнуюГруппа.StartsWith("Ю") && Veteran.ВозрастнуюГруппа.EndsWith("р")  select Veteran;
+                    dg1.ItemsSource = age.ToList();
+                    MessageBox.Show("Были выбраны только юниоры");
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка");
+                }
+            }            
+        }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            using (Devyatkinv11pr18Context _db = new Devyatkinv11pr18Context()) 
+            { 
+                if (rdo1.IsChecked == true) 
+                {
+                    
+                }
+            }
+        }
     }
 }
